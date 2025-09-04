@@ -1,0 +1,267 @@
+(Базовый уровень)
+
+1 - Функция GetInitials(string fullName)
+Принимает строку с полным именем (например, "Иван Иванов") и возвращает инициалы в формате "И.И.".
+
+using System;
+
+class Program
+{
+    static string GetInitials(string fullName)
+    {
+        string[] parts = fullName.Split(' ');
+        return $"{parts[0][0]}.{parts[1][0]}.";
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(GetInitials("Иван Иванов"));
+    }
+}
+
+2 - Функция Cube(int n)
+Принимает число и возвращает его куб.
+
+using System;
+
+class Program
+{
+    static int Cube(int n)
+    {
+        return n * n * n;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(Cube(3));
+    }
+}
+
+3 - Функция GetMin(int a, int b)
+Возвращает меньшее из двух чисел.
+
+using System;
+
+class Program
+{
+    static int GetMin(int a, int b)
+    {
+        return (a < b) ? a : b;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(GetMin(5, 8));
+    }
+}
+
+(Средний уровень)
+
+1 - Функция CountDigits(int n)
+Принимает число и возвращает количество цифр в нём.
+
+using System;
+
+class Program
+{
+    static int CountDigits(int n)
+    {
+        return n.ToString().Length;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(CountDigits(12345)); 
+    }
+}
+
+2 - Функция SumOfEven(int n)
+Возвращает сумму всех чётных чисел от 1 до n.
+
+using System;
+
+class Program
+{
+    static int SumOfEven(int n)
+    {
+        int sum = 0;
+        for (int i = 2; i <= n; i += 2)
+        {
+            sum += i;
+        }
+        return sum;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(SumOfEven(10));
+    }
+}
+
+3 - Функция GetLastChar(string text)
+Принимает строку и возвращает последний символ.
+
+using System;
+
+class Program
+{
+    static char GetLastChar(string text)
+    {
+        return text[text.Length - 1];
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(GetLastChar("Привет"));
+    }
+}
+
+(Продвинутый уровень)
+
+1 - Функция Fibonacci(int n)
+Возвращает n-й элемент последовательности Фибоначчи.
+
+using System;
+
+class Program
+{
+    static int Fibonacci(int n)
+    {
+        if (n <= 0) return 0;
+        if (n == 1) return 1;
+
+        int a = 0, b = 1, c = 0;
+        for (int i = 2; i <= n; i++)
+        {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(Fibonacci(7)); // 13
+    }
+}
+
+2 - Функция Palindrome(string text)
+Проверяет, является ли строка палиндромом (читается одинаково слева направо и справа налево).
+Пример: «шалаш» → true.
+
+using System;
+
+class Program
+{
+    static bool Palindrome(string text)
+    {
+        for (int i = 0; i < text.Length / 2; i++)
+        {
+            if (text[i] != text[text.Length - 1 - i])
+                return false;
+        }
+        return true;
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(Palindrome("шалаш"));
+        Console.WriteLine(Palindrome("привет"));
+    }
+}
+
+(Домашнее задание)
+
+Проект: “Мини-библиотека функций”
+Студент должен создать консольное приложение, где будут реализованы:
+
+1. Функция для перевода температуры из Цельсия в Фаренгейты.
+Формула: F = C * 9/5 + 32. (10 баллов)
+
+2. Функция, которая возвращает среднее арифметическое массива чисел. 
+
+3. Функция, которая считает количество гласных букв в строке. 
+
+4. Красивое меню с выбором функции для вызова. 
+
+using System;
+using System.Linq;
+
+class Program
+{
+    // 1. Перевод Цельсия в Фаренгейты
+    static double CelsiusToFahrenheit(double celsius)
+    {
+        return celsius * 9 / 5 + 32;
+    }
+
+    // 2. Среднее арифметическое массива
+    static double Average(int[] numbers)
+    {
+        if (numbers.Length == 0) return 0;
+        return numbers.Average();
+    }
+
+    // 3. Количество гласных в строке
+    static int CountVowels(string text)
+    {
+        string vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ";
+        int count = 0;
+        foreach (char c in text)
+        {
+            if (vowels.Contains(c))
+                count++;
+        }
+        return count;
+    }
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("=== Мини-библиотека функций ===");
+            Console.WriteLine("1. Цельсий → Фаренгейты");
+            Console.WriteLine("2. Среднее арифметическое массива");
+            Console.WriteLine("3. Количество гласных в строке");
+            Console.WriteLine("0. Выход");
+            Console.Write("Ваш выбор: ");
+            
+            string choice = Console.ReadLine();
+
+            if (choice == "1")
+            {
+                Console.Write("Введите температуру в °C: ");
+                double c = double.Parse(Console.ReadLine());
+                Console.WriteLine("Результат: " + CelsiusToFahrenheit(c));
+            }
+            else if (choice == "2")
+            {
+                Console.Write("Введите числа через пробел: ");
+                int[] numbers = Console.ReadLine()
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse).ToArray();
+                Console.WriteLine("Результат: " + Average(numbers));
+            }
+            else if (choice == "3")
+            {
+                Console.Write("Введите строку: ");
+                string text = Console.ReadLine();
+                Console.WriteLine("Результат: " + CountVowels(text));
+            }
+            else if (choice == "0")
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Неверный выбор!");
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
+
+
+
